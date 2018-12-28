@@ -2,7 +2,7 @@
 One-class recommendation algorithm from implicit feedback
 
 ## Description
-For implicit feedback recommendation problem, One-class recommendation (BPR) often performs well for either classification (task 1) or regression (task 2). This project participates in Kaggle competition https://www.kaggle.com/c/cse158-258-fa17-visit-prediction.
+For implicit feedback recommendation problem, One-class recommendation (BPR) often performs well for either classification (task 1) or regression (task 2). This project participates in Kaggle competition https://www.kaggle.com/c/cse158-258-fa17-visit-prediction, and won the 1st place.
 
 ## Environment
 Python 3.7
