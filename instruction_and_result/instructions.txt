@@ -1,0 +1,79 @@
+
+*** Instructions ***
+
+In this assignment you will build recommender systems to make predictions related to reviews of businesses
+from Google Local.
+Solutions will be graded on Kaggle (see below), with the competition closing at 5pm, Monday November
+20 (note that the time reported on the competition webpage is in UTC!).
+You will also be graded on a brief report, to be submitted electronically on gradescope by the following
+day. Your grades will be determined by your performance on the predictive tasks as well as your written report
+about the approaches you took.
+This assignment should be completed individually.
+To begin, download the files for this assignment from:
+http://jmcauley.ucsd.edu/data/assignment1.tar.gz
+
+
+*** Files ***
+
+train.json.gz 
+200,000 reviews to be used for training. It is not necessary to use all reviews for training, for
+example if doing so proves too computationally intensive. While these files are one-json-per-line (much as
+we have seen so far in class), you may and it useful to represent them more concisely in order to produce
+a more ecient solution. The fields in this file are:
+	- businessID The ID of the business. This is a hashed product identier from Google.
+	- userID The ID of the reviewer. This is a hashed user identier from Google.
+	- rating The star rating of the user's review.
+	- reviewText The text of the review. It should be possible to successfully complete this assignment
+	without making use of the review data, though an eective solution to the category prediction task
+	will presumably make use of it.
+	- reviewHash Hash of the review (essentially a unique identier for the review).
+	- unixReviewTime Time of the review in seconds since 1970.
+	- reviewTime Plain-text representation of the review time.
+	- categories Category labels of the product being reviewed.
+
+pairs Visit.txt Pairs on which you are to predict whether a user would visit a business.
+
+pairs Category.txt Pairs (userID and reviewHash) on which you are to predict the category of an item.
+(Not relevant for CSE258)
+
+pairs Rating.txt Pairs (userIDs and businessIDs) on which you are to predict ratings.
+
+test Category.json.gz The review data associated with the category prediction test set. Again, the eld
+that you are trying to predict has been removed.
+
+baselines.py A simple baseline for each task, described below.
+
+
+*** Tasks ***
+You are expected to complete the following tasks:
+
+Visit prediction 
+Predict given a (user,business) pair from `pairs Visit.txt' whether the user visited the busi-
+ness (really, whether it was one of the business they reviewed). Accuracy will be measured in terms of
+the categorization accuracy (1 minus the Hamming loss). The test set has been constructed such that
+exactly 50% of the pairs correspond to visited business and the other 50% do not. Performance will be
+measured in terms of the fraction of correct classications.
+
+Rating prediction 
+Predict people's star ratings as accurately as possible, for those (user,item) pairs in
+`pairs Rating.txt'. Accuracy will be measured in terms of the (root) mean-squared error (RMSE).
+
+These error measures are described on Kaggle:
+Classication accuracy Is equivalent to 1 minus the Hamming Loss: https://www.kaggle.com/wiki/
+HammingLoss
+RMSE https://www.kaggle.com/wiki/RootMeanSquaredError
+A competition page has been set up on Kaggle to keep track of your results compared to those of other
+members of the class. The leaderboard will show your results on half of the test data, but your ultimate score
+will depend on your predictions across the whole dataset.
+
+Baselines
+Simple baselines have been provided for each of the tasks. These are included in `baselines.py' among the les
+above. These baselines operate as follows:
+
+Visit prediction Find the most popular businesses that account for 50% of visits in the training data. Return
+`1' whenever such a business is seen at test time, `0' otherwise.
+
+Rating prediction Return the global average rating, or the user's average if we have seen them before in the
+training data.
+Running `baselines.py' produces les containing predicted outputs. Your submission les should have the same
+format.
